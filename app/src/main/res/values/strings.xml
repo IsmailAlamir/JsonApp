@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Json</string>
+    <string name="submit">submit</string>
+    <string name="string_copy_right">Copy Right</string>
+    <string name="setting">Setting</string>
+
+    <string-array name="Blood_type">
+        <item>A</item>
+        <item>B</item>
+        <item>AB</item>
+        <item>O</item>
+    </string-array>
+</resources>
