@@ -1,28 +1,36 @@
 package com.example.json;
 
+import static com.example.json.SettingActivity.NAME;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
     static final String TAG= MainActivity.class.getName();
-    public static final int COPYRIGHT_ID = R.id.copyright;
-    public static final int SETTING_ID = R.id.settings;
+    TextView nameTextView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        nameTextView =findViewById(R.id.tv_main_name);
         Button submitBtn= findViewById(R.id.button_submit);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -39,6 +47,21 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume: called : we can see the screen");
+        Log.i(TAG, nameTextView.getText().toString()+"");
+        setName();
+        Log.i(TAG, nameTextView.getText().toString()+"");
+
+
+    }
+
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -49,10 +72,10 @@ public class MainActivity extends AppCompatActivity {
 //        int itemId = item.getItemId();
 //
 //        switch (itemId) {
-//            case 2131296758:
+//            case R.id.settings:
 //                navigateToSettings();
 //                return true;
-//            case 2131296757:
+//            case R.id.copyright:
 //                Toast.makeText(this, "Copy right 2023", Toast.LENGTH_SHORT).show();
 //                return true;
 //            default:
@@ -82,6 +105,18 @@ public class MainActivity extends AppCompatActivity {
     private void navigateToSettings() {
         Intent settingsIntent = new Intent(this, SettingActivity.class);
         startActivity(settingsIntent);
+    }
+
+
+    private void setName() {
+        // get text out of shared preference
+        SharedPreferences sharedPreferences = getSharedPreferences("MyData", MODE_PRIVATE);
+        String name = sharedPreferences.getString("name","No Name Yet");
+
+        // set text on text view
+        nameTextView.setText(name);
+
+
     }
 
 

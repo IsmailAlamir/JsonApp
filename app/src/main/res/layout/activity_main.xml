@@ -33,4 +33,15 @@
         app:layout_constraintTop_toBottomOf="@+id/spinner_blood_type"
         android:layout_marginTop="18dp"/>
 
+    <TextView
+        android:padding="16dp"
+        android:id="@+id/tv_main_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Name Yet"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
