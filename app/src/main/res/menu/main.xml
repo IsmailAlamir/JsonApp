@@ -17,4 +17,13 @@
         android:orderInCategory="2"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/doctors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/dotors"
+        android:orderInCategory="3"
+        app:showAsAction="never" />
+
+
 </menu>

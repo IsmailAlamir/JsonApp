@@ -13,17 +13,20 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.json.doctor.DoctorActivity;
+
 
 public class MainActivity extends AppCompatActivity {
     static final String TAG= MainActivity.class.getName();
     TextView nameTextView;
-
+    private String[] mBloodType = new String[]{"A", "B", "AB", "O"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +35,28 @@ public class MainActivity extends AppCompatActivity {
 
         nameTextView =findViewById(R.id.tv_main_name);
         Button submitBtn= findViewById(R.id.button_submit);
+
+        // create adapter
+//        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(
+//                this,
+//                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+//                mBloodType
+//        );
+        // another way
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.Blood_type,
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+
+        // this is optional
+//        spinnerAdapter.setDropDownViewResource("Pass in a resource file");
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,10 +114,15 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Copy right 2023", Toast.LENGTH_LONG).show();
             Log.i(TAG,"Copy Right 2023");
             return true;
+        } else if (itemId == R.id.doctors) {
+            navigateToDoctors();
+            return true;
+
         } else {
             return super.onOptionsItemSelected(item);
         }
     }
+
 
 
     private void navigateToBloodDetails() {
@@ -106,6 +133,12 @@ public class MainActivity extends AppCompatActivity {
         Intent settingsIntent = new Intent(this, SettingActivity.class);
         startActivity(settingsIntent);
     }
+    private void navigateToDoctors() {
+        Intent doctorIntent = new Intent(this, DoctorActivity.class);
+        startActivity(doctorIntent);
+
+    }
+
 
 
     private void setName() {
